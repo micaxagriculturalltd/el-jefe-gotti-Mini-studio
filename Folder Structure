@@ -1,0 +1,28 @@
+el-jefe-gotti-studio/
+├─ package.json
+├─ vite.config.js
+├─ tailwind.config.js
+├─ postcss.config.js
+├─ index.html
+├─ src/
+│  ├─ main.jsx
+│  ├─ index.css
+│  └─ components/
+│      └─ BeatMakerApp.jsx
+├─ public/
+│  └─ samples/
+│      ├─ hiphop/
+│      ├─ edm/
+│      ├─ trap/
+│      ├─ jazz/
+│      ├─ afrobeats/
+│      ├─ drill/
+│      ├─ dancehall/
+│      ├─ amapiano/
+│      ├─ afrohouse/
+│      ├─ reggae/
+│      ├─ africandrums/
+│      ├─ rnb/
+│      ├─ melodic/
+│      ├─ winds/
+│      └─ percussion/
