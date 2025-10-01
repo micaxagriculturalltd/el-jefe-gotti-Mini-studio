@@ -1,0 +1,103 @@
+import React, { useState, useEffect, useRef } from "react";
+
+/* 
+  This is the main BeatMaker Studio component.
+  Features:
+  - All genres + percussion kits
+  - 16 / 32 step sequencer toggle
+  - Pattern save/load & export
+  - Audio recording & simple Auto-Tune toggle
+  - Mixing & Mastering placeholders
+  - Branding: El-Jefe Gotti Studio
+*/
+
+export default function BeatMakerApp() {
+  const [selectedGenre, setSelectedGenre] = useState("hiphop");
+  const [steps, setSteps] = useState(16);
+  const [tempo, setTempo] = useState(120);
+  const [patterns, setPatterns] = useState([]);
+  const [autoTuneEnabled, setAutoTuneEnabled] = useState(true);
+
+  const genres = [
+    "hiphop","edm","trap","jazz","afrobeats","drill","dancehall",
+    "amapiano","afrohouse","reggae","africandrums","rnb","melodic","winds","percussion"
+  ];
+
+  // Placeholder for tracks
+  const tracks = ["kick","snare","hihat","bass","clap","synth","percussion","piano","guitar","strings","flute","saxophone","chords"];
+
+  // Placeholder functions for recording, save/load, export
+  const recordAudio = () => alert("🎤 Recording enabled (placeholder)");
+  const stopRecording = () => alert("🛑 Recording stopped (placeholder)");
+  const savePattern = () => alert("💾 Pattern saved (placeholder)");
+  const loadPattern = () => alert("📂 Load pattern (placeholder)");
+  const exportBeat = () => alert("📀 Export beat as WAV (placeholder)");
+
+  return (
+    <div className="p-4">
+      <h1 className="text-3xl font-bold mb-4">🎛️ El-Jefe Gotti Studio</h1>
+
+      {/* Genre Selector */}
+      <div className="mb-4">
+        <label className="mr-2 font-semibold">Select Genre:</label>
+        <select
+          value={selectedGenre}
+          onChange={e => setSelectedGenre(e.target.value)}
+          className="border p-1 rounded"
+        >
+          {genres.map(g => <option key={g} value={g}>{g}</option>)}
+        </select>
+      </div>
+
+      {/* Sequencer Settings */}
+      <div className="mb-4">
+        <label className="mr-2 font-semibold">Steps:</label>
+        <select value={steps} onChange={e=>setSteps(Number(e.target.value))} className="border p-1 rounded">
+          <option value={16}>16</option>
+          <option value={32}>32</option>
+        </select>
+        <label className="ml-4 mr-2 font-semibold">Tempo:</label>
+        <input type="number" value={tempo} onChange={e=>setTempo(Number(e.target.value))} className="border p-1 w-16 rounded"/> BPM
+      </div>
+
+      {/* Sequencer Grid Placeholder */}
+      <div className="grid grid-cols-1 gap-2 mb-4">
+        {tracks.map(track => (
+          <div key={track} className="flex items-center">
+            <span className="w-20">{track}</span>
+            <div className="flex flex-wrap flex-1">
+              {Array.from({length: steps}).map((_, i) => <div key={i} className="w-6 h-6 m-0.5 bg-gray-300 rounded cursor-pointer"></div>)}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Controls */}
+      <div className="mb-4 space-x-2">
+        <button onClick={recordAudio} className="bg-red-500 text-white px-3 py-1 rounded">Record</button>
+        <button onClick={stopRecording} className="bg-gray-500 text-white px-3 py-1 rounded">Stop</button>
+        <button onClick={()=>setAutoTuneEnabled(!autoTuneEnabled)} className={`px-3 py-1 rounded ${autoTuneEnabled?"bg-green-500":"bg-gray-500"} text-white`}>
+          El-Jefe Gotti Auto-Tune {autoTuneEnabled?"ON":"OFF"}
+        </button>
+        <button onClick={savePattern} className="bg-blue-500 text-white px-3 py-1 rounded">Save Pattern</button>
+        <button onClick={loadPattern} className="bg-yellow-500 text-white px-3 py-1 rounded">Load Pattern</button>
+        <button onClick={exportBeat} className="bg-purple-500 text-white px-3 py-1 rounded">Export Beat</button>
+      </div>
+
+      {/* Mixing Panel Placeholder */}
+      <div className="border p-2 rounded">
+        <h2 className="font-bold mb-2">Mixing & Mastering Panel</h2>
+        {tracks.map(track => (
+          <div key={track} className="flex items-center mb-1">
+            <span className="w-20">{track}</span>
+            <input type="range" min="0" max="100" defaultValue="80" className="flex-1"/>
+            <button className="ml-2 px-2 bg-gray-300 rounded">Mute</button>
+            <button className="ml-1 px-2 bg-gray-300 rounded">Solo</button>
+          </div>
+        ))}
+      </div>
+
+      <p className="mt-4 text-gray-500">All sounds are placeholder synthetic .wav files. Replace with real samples for full production quality.</p>
+    </div>
+  );
+}
